@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  test_best_joke_yandex_alice:
+    container_name: TestBestJokeYandexAlice
+    ports:
+      - "8444:80"
+    build:
+      context: .
+        
+    restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

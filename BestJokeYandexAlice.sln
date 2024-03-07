@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{B1712AEA-9492-4C4B-BAD9-B7D3C52E6B94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{A9402F12-C2CE-438F-98F8-BD57E52EDF08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{9B87EA1E-701E-440B-A37C-29E05C117957}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1712AEA-9492-4C4B-BAD9-B7D3C52E6B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1712AEA-9492-4C4B-BAD9-B7D3C52E6B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1712AEA-9492-4C4B-BAD9-B7D3C52E6B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1712AEA-9492-4C4B-BAD9-B7D3C52E6B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9402F12-C2CE-438F-98F8-BD57E52EDF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9402F12-C2CE-438F-98F8-BD57E52EDF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9402F12-C2CE-438F-98F8-BD57E52EDF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9402F12-C2CE-438F-98F8-BD57E52EDF08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B87EA1E-701E-440B-A37C-29E05C117957}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B87EA1E-701E-440B-A37C-29E05C117957}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B87EA1E-701E-440B-A37C-29E05C117957}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B87EA1E-701E-440B-A37C-29E05C117957}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
