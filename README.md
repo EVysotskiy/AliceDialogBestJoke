@@ -11,3 +11,5 @@ Clone the repository<br>
 ```zsh
 git clone https://github.com/EVysotskiy/AliceDialogBestJoke.git
 ```
+
+## 🤖 [Link to dialogue](https://dialogs.yandex.ru/store/skills/c0959d1e-zabavnye-anekdoty)
