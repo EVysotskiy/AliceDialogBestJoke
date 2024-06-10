@@ -35,10 +35,8 @@ jobs:
         id: build
         run: |
           # Build Docker images
-          cd ./imageGenerator
-          docker buildx build --platform linux/amd64 --load -t image-generator-client:latest -f Client/Dockerfile .
+          cd ./projects/BestJokeAlicaDeployment
           docker buildx build --platform linux/amd64 --load -t image-generator-server:latest -f Server/Dockerfile .
-          docker save -o image-generator-client.tar image-generator-client:latest
           docker save -o image-generator-server.tar image-generator-server:latest
 
       - uses: shimataro/ssh-key-action@v2
@@ -60,16 +58,6 @@ jobs:
           source: ./imageGenerator/docker-compose-cd.yml
           target: /home/vadim/
             
-      - name: Copy client image to remote server
-        uses: appleboy/scp-action@v0.1.1
-        with:
-          host: 188.242.196.201
-          port: 8998
-          username: vadim
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: ./imageGenerator/image-generator-client.tar
-          target: /home/vadim/image-generator-client
-            
       - name: Copy server image to remote server
         uses: appleboy/scp-action@v0.1.1
         with:
@@ -88,22 +76,21 @@ jobs:
         run: |
           chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa -p 8998 vadim@188.242.196.201 '
-          docker load -i /home/vadim/image-generator-client/imageGenerator/image-generator-client.tar
           docker load -i /home/vadim/image-generator-server/imageGenerator/image-generator-server.tar
           docker-compose -f /home/vadim/imageGenerator/docker-compose-cd.yml down || true &&
           docker-compose -f /home/vadim/imageGenerator/docker-compose-cd.yml up -d
           '
           
-      - name: send telegram message on push
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            Job build-and-deploy completed with status: ${{ job.status }} ${{ steps.build.outcome == 'success' && steps.deploy.outcome == 'success' && '✅' || '⛔️' }}
-            Build status: ${{ steps.build.outcome == 'success' && '✅' || '⛔️' }}
-            Deploy status: ${{ steps.deploy.outcome == 'success' && '✅' || '⛔️' }}
-            Initiated by: ${{ github.actor }}
-            Repository: ${{ github.repository }}
-            Commit message: ${{ github.event.head_commit.message }}
-            See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+      # - name: send telegram message on push
+      #   uses: appleboy/telegram-action@master
+      #   with:
+      #     to: ${{ secrets.TELEGRAM_TO }}
+      #     token: ${{ secrets.TELEGRAM_TOKEN }}
+      #     message: |
+      #       Job build-and-deploy completed with status: ${{ job.status }} ${{ steps.build.outcome == 'success' && steps.deploy.outcome == 'success' && '✅' || '⛔️' }}
+      #       Build status: ${{ steps.build.outcome == 'success' && '✅' || '⛔️' }}
+      #       Deploy status: ${{ steps.deploy.outcome == 'success' && '✅' || '⛔️' }}
+      #       Initiated by: ${{ github.actor }}
+      #       Repository: ${{ github.repository }}
+      #       Commit message: ${{ github.event.head_commit.message }}
+      #       See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
